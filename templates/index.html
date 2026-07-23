@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>叶子</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        .player-box{
+            width: 640px;
+            background:#fff;
+            border:3px solid #ffc2d6;
+            border-radius:36px;
+            padding:44px 36px;
+            text-align:center;
+            box-shadow: 0 0 24px #ffd6e3;
+        }
+        .cat-icon{
+            font-size:80px;
+            margin-bottom:12px;
+        }
+        .title{
+            font-size:46px;
+            color:#ff6699;
+            margin-bottom:26px;
+        }
+        .now-play-bar{
+            background-color:#ffe6ef;
+            border-radius:32px;
+            padding:14px;
+            font-size:22px;
+            color:#c94475;
+            font-weight:bold;
+            margin-bottom:20px;
+        }
+        .control-group{
+            display:flex;
+            gap:18px;
+            justify-content:center;
+            margin-bottom:24px;
+        }
+        .control-btn{
+            background-color:#ffc2d6;
+            color:#fff;
+            border:none;
+            font-size:15px;
+            padding:7px 20px;
+            border-radius:30px;
+            cursor:pointer;
+            transition:0.2s;
+        }
+        .control-btn:hover{
+            background-color:#ff78a8;
+            transform:scale(1.03);
+        }
+        audio{
+            width:100%;
+            margin-bottom:30px;
+        }
+        .song-item{
+            background:#ffe7ef;
+            padding:13px;
+            border-radius:18px;
+            margin:10px 0;
+            cursor:pointer;
+            color:#bb3862;
+            font-size:18px;
+            transition:0.2s;
+        }
+        .song-item:hover{
+            background:#ffc8dd;
+        }
+        .song-item.active{
+            background:#ffb6c1;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    <div class="player-box">
+        <div class="cat-icon">🐱</div>
+        <h1 class="title">叶子 ♡ 音乐小屋</h1>
+
+        <div class="now-play-bar">
+            🎀 当前播放：<span id="currentSongName">暂无歌曲</span>
+        </div>
+
+        <div class="control-group">
+            <button class="control-btn" id="prevBtn">◀ 上一曲</button>
+            <button class="control-btn" id="nextBtn">下一曲 ▶</button>
+        </div>
+
+        <audio id="audioPlayer" controls>
+            <source id="audioSource" src="" type="audio/mpeg">
+            浏览器不支持音频
+
+
+        <div class="song-list">
+            {% for song in songs %}
+            <div class="song-item"
+                 data-url="{{song.url}}"
+                 data-name="{{song.name}}"
+                 data-type="{{song.type}}">
+                ♡ {{song.name}}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+<script>
+    const audioPlayer = document.getElementById("audioPlayer");
+    const audioSource = document.getElementById("audioSource");
+    const songItems = document.querySelectorAll(".song-item");
+    const currentSongName = document.getElementById("currentSongName");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let currentIndex = 0;
+    const songsArr = Array.from(songItems);
+    audioPlayer.volume = 0.7;
+
+    function loadSong(index){
+        currentIndex = index;
+        const item = songsArr[currentIndex];
+        const url = item.dataset.url;
+        const type = item.dataset.type;
+        let playUrl;
+
+        // 判断模式：本地/网络
+        if(type === "local"){
+            playUrl = `/static/music/${url}`;
+        }else{
+            playUrl = url;
+        }
+
+        audioSource.src = playUrl;
+        audioPlayer.load();
+        audioPlayer.play();
+        updateActive();
+        currentSongName.innerText = item.dataset.name;
+    }
+    function updateActive(){
+        songItems.forEach(i=>i.classList.remove("active"));
+        songsArr[currentIndex].classList.add("active");
+    }
+
+    if(songsArr.length>0) loadSong(0);
+
+    songItems.forEach((item,idx)=>{
+        item.onclick = ()=> loadSong(idx);
+    })
+
+    prevBtn.addEventListener("click", ()=>{
+        let prev = currentIndex - 1;
+        if(prev < 0) prev = songsArr.length - 1;
+        loadSong(prev);
+    })
+    nextBtn.addEventListener("click", ()=>{
+        let next = currentIndex + 1;
+        if(next >= songsArr.length) next = 0;
+        loadSong(next);
+    })
+
+    audioPlayer.addEventListener("ended",()=>{
+        let next = currentIndex +1;
+        if(next >= songsArr.length) next =0;
+        loadSong(next);
+    })
+</script>
+</body>
+</html>
