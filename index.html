@@ -1,214 +1,182 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>我的个人博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="一个个人技术&#x2F;生活博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="我的个人博客">
-<meta property="og:url" content="https://username.github.io/index.html">
-<meta property="og:site_name" content="我的个人博客">
-<meta property="og:description" content="一个个人技术&#x2F;生活博客">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="你的名字">
-<meta property="article:tag" content="blog,个人博客">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="我的个人博客" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
-
-<meta name="generator" content="Hexo 8.1.2"></head>
-
+    <meta charset="UTF-8">
+    <title>叶子</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        .player-box{
+            width: 640px;
+            background:#fff;
+            border:3px solid #ffc2d6;
+            border-radius:36px;
+            padding:44px 36px;
+            text-align:center;
+            box-shadow: 0 0 24px #ffd6e3;
+        }
+        .cat-icon{
+            font-size:80px;
+            margin-bottom:12px;
+        }
+        .title{
+            font-size:46px;
+            color:#ff6699;
+            margin-bottom:26px;
+        }
+        .now-play-bar{
+            background-color:#ffe6ef;
+            border-radius:32px;
+            padding:14px;
+            font-size:22px;
+            color:#c94475;
+            font-weight:bold;
+            margin-bottom:20px;
+        }
+        .control-group{
+            display:flex;
+            gap:18px;
+            justify-content:center;
+            margin-bottom:24px;
+        }
+        .control-btn{
+            background-color:#ffc2d6;
+            color:#fff;
+            border:none;
+            font-size:15px;
+            padding:7px 20px;
+            border-radius:30px;
+            cursor:pointer;
+            transition:0.2s;
+        }
+        .control-btn:hover{
+            background-color:#ff78a8;
+            transform:scale(1.03);
+        }
+        audio{
+            width:100%;
+            margin-bottom:30px;
+        }
+        .song-item{
+            background:#ffe7ef;
+            padding:13px;
+            border-radius:18px;
+            margin:10px 0;
+            cursor:pointer;
+            color:#bb3862;
+            font-size:18px;
+            transition:0.2s;
+        }
+        .song-item:hover{
+            background:#ffc8dd;
+        }
+        .song-item.active{
+            background:#ffb6c1;
+            color:white;
+        }
+    </style>
+</head>
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">我的个人博客</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">记录生活，分享成长</a>
-        </h2>
-      
+    <div class="player-box">
+        <div class="cat-icon">🐱</div>
+        <h1 class="title">叶子 ♡ 音乐小屋</h1>
+
+        <div class="now-play-bar">
+            🎀 当前播放：<span id="currentSongName">暂无歌曲</span>
+        </div>
+
+        <div class="control-group">
+            <button class="control-btn" id="prevBtn">◀ 上一曲</button>
+            <button class="control-btn" id="nextBtn">下一曲 ▶</button>
+        </div>
+
+        <audio id="audioPlayer" controls>
+            <source id="audioSource" src="" type="audio/mpeg">
+            浏览器不支持音频
+
+
+        <div class="song-list">
+            {% for song in songs %}
+            <div class="song-item"
+                 data-url="{{song.url}}"
+                 data-name="{{song.name}}"
+                 data-type="{{song.type}}">
+                ♡ {{song.name}}
+            </div>
+            {% endfor %}
+        </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://username.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
 
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/07/23/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2026-07-23T08:52:40.153Z" itemprop="datePublished">2026-07-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/07/23/hello-world/">Hello World</a>
-    </h1>
-  
+<script>
+    const audioPlayer = document.getElementById("audioPlayer");
+    const audioSource = document.getElementById("audioSource");
+    const songItems = document.querySelectorAll(".song-item");
+    const currentSongName = document.getElementById("currentSongName");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+    let currentIndex = 0;
+    const songsArr = Array.from(songItems);
+    audioPlayer.volume = 0.7;
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+    function loadSong(index){
+        currentIndex = index;
+        const item = songsArr[currentIndex];
+        const url = item.dataset.url;
+        const type = item.dataset.type;
+        let playUrl;
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+        // 判断模式：本地/网络
+        if(type === "local"){
+            playUrl = `/static/music/${url}`;
+        }else{
+            playUrl = url;
+        }
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+        audioSource.src = playUrl;
+        audioPlayer.load();
+        audioPlayer.play();
+        updateActive();
+        currentSongName.innerText = item.dataset.name;
+    }
+    function updateActive(){
+        songItems.forEach(i=>i.classList.remove("active"));
+        songsArr[currentIndex].classList.add("active");
+    }
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    if(songsArr.length>0) loadSong(0);
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://username.github.io/2026/07/23/hello-world/" data-id="cuidBQ-o46RxtsLu7jLhPFX1D" data-title="Hello World" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
+    songItems.forEach((item,idx)=>{
+        item.onclick = ()=> loadSong(idx);
+    })
 
+    prevBtn.addEventListener("click", ()=>{
+        let prev = currentIndex - 1;
+        if(prev < 0) prev = songsArr.length - 1;
+        loadSong(prev);
+    })
+    nextBtn.addEventListener("click", ()=>{
+        let next = currentIndex + 1;
+        if(next >= songsArr.length) next = 0;
+        loadSong(next);
+    })
 
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">七月 2026</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2026/07/23/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2026 你的名字<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
+    audioPlayer.addEventListener("ended",()=>{
+        let next = currentIndex +1;
+        if(next >= songsArr.length) next =0;
+        loadSong(next);
+    })
+</script>
 </body>
 </html>
