@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>叶子</title>
+    <title>叶子喵~</title>
     <style>
         * {
             margin: 0;
@@ -33,7 +33,12 @@
         .title{
             font-size:46px;
             color:#ff6699;
-            margin-bottom:26px;
+            margin-bottom:16px;
+        }
+        .drop-tip{
+            color:#ff7799;
+            font-size:15px;
+            margin-bottom:20px;
         }
         .now-play-bar{
             background-color:#ffe6ef;
@@ -46,16 +51,17 @@
         }
         .control-group{
             display:flex;
-            gap:18px;
+            gap:12px;
             justify-content:center;
             margin-bottom:24px;
+            flex-wrap: wrap;
         }
         .control-btn{
             background-color:#ffc2d6;
             color:#fff;
             border:none;
             font-size:15px;
-            padding:7px 20px;
+            padding:7px 16px;
             border-radius:30px;
             cursor:pointer;
             transition:0.2s;
@@ -66,7 +72,7 @@
         }
         audio{
             width:100%;
-            margin-bottom:30px;
+            margin-bottom:20px;
         }
         .song-item{
             background:#ffe7ef;
@@ -85,12 +91,19 @@
             background:#ffb6c1;
             color:white;
         }
+        .drag-over{
+            border:3px dashed #ff6699 !important;
+        }
+        #fileInput{
+            display:none;
+        }
     </style>
 </head>
 <body>
-    <div class="player-box">
+    <div class="player-box" id="mainBox">
         <div class="cat-icon">🐱</div>
         <h1 class="title">叶子 ♡ 音乐小屋</h1>
+        <div class="drop-tip">💡 拖拽MP3到页面内 或 点击按钮选择本地音频 | 选中歌曲后手动点击播放按钮</div>
 
         <div class="now-play-bar">
             🎀 当前播放：<span id="currentSongName">暂无歌曲</span>
@@ -99,84 +112,124 @@
         <div class="control-group">
             <button class="control-btn" id="prevBtn">◀ 上一曲</button>
             <button class="control-btn" id="nextBtn">下一曲 ▶</button>
+            <button class="control-btn" id="selectFileBtn">📂 选择本地歌曲</button>
         </div>
 
+        <!-- 重点改动：直接操作audio，删除多余source标签 -->
         <audio id="audioPlayer" controls>
-            <source id="audioSource" src="" type="audio/mpeg">
-            浏览器不支持音频
 
-
-        <div class="song-list">
-            {% for song in songs %}
-            <div class="song-item"
-                 data-url="{{song.url}}"
-                 data-name="{{song.name}}"
-                 data-type="{{song.type}}">
-                ♡ {{song.name}}
-            </div>
-            {% endfor %}
+        <div class="song-list" id="songListBox">
         </div>
+
+        <input type="file" id="fileInput" accept=".mp3,.wav,.ogg,.m4a" multiple>
     </div>
 
 <script>
+    // 内置网络歌单
+    let song_list = [
+        
+
+    ];
+
     const audioPlayer = document.getElementById("audioPlayer");
-    const audioSource = document.getElementById("audioSource");
-    const songItems = document.querySelectorAll(".song-item");
     const currentSongName = document.getElementById("currentSongName");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
+    const songListBox = document.getElementById("songListBox");
+    const mainBox = document.getElementById("mainBox");
+    const selectFileBtn = document.getElementById("selectFileBtn");
+    const fileInput = document.getElementById("fileInput");
 
     let currentIndex = 0;
-    const songsArr = Array.from(songItems);
+
+    // 渲染歌单
+    function renderList(){
+        songListBox.innerHTML = "";
+        song_list.forEach((song, idx)=>{
+            const div = document.createElement("div");
+            div.className = "song-item";
+            div.innerText = "♡ " + song.name;
+            div.onclick = ()=> loadSong(idx);
+            songListBox.appendChild(div);
+        })
+    }
+
+    // 加载歌曲【关键修复：直接 audio.src，移除source】
+    function loadSong(index){
+        if(song_list.length === 0) return;
+        currentIndex = index;
+        const song = song_list[currentIndex];
+        audioPlayer.src = song.url;
+        audioPlayer.load();
+        currentSongName.innerText = song.name;
+        updateActive();
+    }
+
+    function updateActive(){
+        const items = document.querySelectorAll(".song-item");
+        items.forEach(item=> item.classList.remove("active"));
+        if(items[currentIndex]) items[currentIndex].classList.add("active");
+    }
+
+    // 初始化
+    renderList();
     audioPlayer.volume = 0.7;
 
-    function loadSong(index){
-        currentIndex = index;
-        const item = songsArr[currentIndex];
-        const url = item.dataset.url;
-        const type = item.dataset.type;
-        let playUrl;
-
-        // 判断模式：本地/网络
-        if(type === "local"){
-            playUrl = `/static/music/${url}`;
-        }else{
-            playUrl = url;
-        }
-
-        audioSource.src = playUrl;
-        audioPlayer.load();
-        audioPlayer.play();
-        updateActive();
-        currentSongName.innerText = item.dataset.name;
-    }
-    function updateActive(){
-        songItems.forEach(i=>i.classList.remove("active"));
-        songsArr[currentIndex].classList.add("active");
-    }
-
-    if(songsArr.length>0) loadSong(0);
-
-    songItems.forEach((item,idx)=>{
-        item.onclick = ()=> loadSong(idx);
-    })
-
+    // 上一曲
     prevBtn.addEventListener("click", ()=>{
-        let prev = currentIndex - 1;
-        if(prev < 0) prev = songsArr.length - 1;
-        loadSong(prev);
-    })
-    nextBtn.addEventListener("click", ()=>{
-        let next = currentIndex + 1;
-        if(next >= songsArr.length) next = 0;
-        loadSong(next);
+        let newIdx = currentIndex - 1;
+        if(newIdx < 0) newIdx = song_list.length -1;
+        loadSong(newIdx);
     })
 
-    audioPlayer.addEventListener("ended",()=>{
-        let next = currentIndex +1;
-        if(next >= songsArr.length) next =0;
-        loadSong(next);
+    // 下一曲
+    nextBtn.addEventListener("click", ()=>{
+        let newIdx = currentIndex + 1;
+        if(newIdx >= song_list.length) newIdx = 0;
+        loadSong(newIdx);
     })
+
+    // 播放结束自动切歌
+    audioPlayer.addEventListener("ended",()=>{
+        let newIdx = currentIndex +1;
+        if(newIdx >= song_list.length) newIdx = 0;
+        loadSong(newIdx);
+    })
+
+    // 选择本地文件
+    selectFileBtn.addEventListener("click", ()=>{
+        fileInput.click();
+    })
+    fileInput.addEventListener("change", (e)=>{
+        const files = e.target.files;
+        addAudioFiles(files);
+        fileInput.value = "";
+    })
+
+    // 拖拽文件
+    ['dragenter','dragover','dragleave','drop'].forEach(eventName=>{
+        mainBox.addEventListener(eventName, e=>e.preventDefault());
+    })
+    mainBox.addEventListener("dragenter",()=>mainBox.classList.add("drag-over"));
+    mainBox.addEventListener("dragover",()=>mainBox.classList.add("drag-over"));
+    mainBox.addEventListener("dragleave",()=>mainBox.classList.remove("drag-over"));
+    mainBox.addEventListener("drop",(e)=>{
+        mainBox.classList.remove("drag-over");
+        const files = e.dataTransfer.files;
+        addAudioFiles(files);
+    })
+
+    // 添加本地音频
+    function addAudioFiles(files){
+        for(let file of files){
+            const url = URL.createObjectURL(file);
+            song_list.push({
+                name: file.name,
+                url: url
+            });
+        }
+        renderList();
+    }
 </script>
 </body>
 </html>
