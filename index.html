@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>叶子喵~</title>
+    <link rel="icon" href="./app.ico" type="image/x-icon">
     <style>
         * {
             margin: 0;
@@ -97,11 +98,26 @@
         #fileInput{
             display:none;
         }
+          .copyright {
+         margin-top: 30px;
+         font-size: 14px;
+         color: #ff88aa;
+        }
+          .about-link {
+         display: inline-block;
+         margin-top: 12px;
+         font-size: 14px;
+         color: #ff6699;
+         text-decoration: none;
+        }
+          .about-link:hover {
+         text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="player-box" id="mainBox">
-        <div class="cat-icon">🐱</div>
+        <div class="cat-icon">😁</div>
         <h1 class="title">叶子喵~and小勋 ♡ 音乐小屋</h1>
         <div class="drop-tip">页面制作by叶子喵~,音乐提供by小勋💡 拖拽MP3到页面内 或 点击按钮选择本地音频 | 选中歌曲后手动点击播放按钮喵~</div>
 
@@ -115,37 +131,37 @@
             <button class="control-btn" id="selectFileBtn">📂 选择本地歌曲</button>
         </div>
 
-        <!-- 重点改动：直接操作audio，删除多余source标签 -->
-        <audio id="audioPlayer" controls>
+        <!-- 修复闭合audio标签 -->
+            <audio id="audioPlayer" controls>
 
-        <div class="song-list" id="songListBox">
-        </div>
+            <div class="song-list" id="songListBox">
+            </div>
+            </audio>
+                <!--版权与关于我-->
+            <div class="copyright">
+                © 2026 叶子喵~&小勋 | 本音乐播放器仅供个人学习使用，禁止商用
+            </div>
+            <a class="about-link" href="https://github.com/yezi1314520" target="_blank">关于我喵</a>
 
-        <input type="file" id="fileInput" accept=".mp3,.wav,.ogg,.m4a" multiple>
+            <input type="file" id="fileInput" accept=".mp3,.wav,.ogg,.m4a" multiple>
     </div>
 
 <script>
     // 内置网络歌单
-    let song_list = [{"name":"精卫",
-                                  "url":"https://s.myhkw.cn/api.php?get=url&type=wy&id=3343737170&sign=6b9tP6jLGDGKI&t=1784898676"},
-                               {"name":"海屿你",
-                                  "url":"https://s.myhkw.cn/api.php?get=url&type=wy&id=1973665667&sign=eco.0Shp364x6&t=1784898816"},
+    let song_list = [{"name":"海屿你",
+                                  "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/hyn.mp3"},
                                {"name":"无人之岛",
-                                  "url":"https://s.myhkw.cn/api.php?get=url&type=wy&id=493735012&sign=59cq4uvV1bvhs&t=1784898959"},
+                                  "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/wrzd.mp3"},
         {"name":"九万字",
-        "url":"https://s.myhkw.cn/api.php?get=url&type=wy&id=1335942780&sign=a6CPGLn/9Sod2&t=1784899510"},
+        "url":"https://v4.gh-proxy.org/https://raw.githubusercontent.com/yezi1314520/muisc/refs/heads/main/9.mp3"},
         {"name":"雨爱",
-        "url":"https://s.myhkw.cn/api.php?get=url&type=wy&id=316100&sign=2eFx15zSnaWl.&t=1784900089"},
+        "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/ya.mp3"},
         {"name":"Call of Silence",
-        "url":"https://s.myhkw.cn/api.php?get=url&type=wy&id=3351406279&sign=9c4ZzL83N74Wk&t=1784901610"},
-        {"name":"nevade",
-        "url":"https://s.myhkw.cn/api.php?get=url&type=wy&id=418602088&sign=cf7HoPRNHVQFU&t=1784901697"},
+        "url":"https://v4.gh-proxy.org/https://raw.githubusercontent.com/yezi1314520/muisc/refs/heads/main/callofsilence.mp3"},
         {"name":"背起了行囊",
-        "url":"https://s.myhkw.cn/api.php?get=url&type=wy&id=1377530437&sign=6fS9FcB6YI6z2&t=1784901926"},
+        "url":"https://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/nkddw.mp3"},
         {"name":"Fever Pitch",
-        "url":"https://s.myhkw.cn/api.php?get=url&type=wy&id=3362038053&sign=46H1y9OX2alJQ&t=1784902092"},
-        {"name":"你走",
-        "url":"https://s.myhkw.cn/api.php?get=url&type=wy&id=558071673&sign=32PGcc7APtMVE&t=1784902202"}
+        "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/fever.mp3"},
 
 
 
@@ -193,7 +209,7 @@
 
     // 初始化
     renderList();
-    audioPlayer.volume = 0.7;
+    audioPlayer.volume = 0.8;
 
     // 上一曲
     prevBtn.addEventListener("click", ()=>{
