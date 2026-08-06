@@ -16,7 +16,7 @@
             justify-content: center;
             align-items: center;
             background-color: #ffffff;
-            font-family: "Microsoft YaHei", sans-serif;
+            font-family: "MiSans", sans-serif;
         }
         .player-box{
             width: 640px;
@@ -144,13 +144,13 @@
             <button class="control-btn" id="selectFileBtn">📂 选择本地歌曲</button>
         </div>
 
-        <!-- 修复闭合audio标签 -->
+
             <audio id="audioPlayer" controls>
 
             <div class="song-list" id="songListBox">
             </div>
             </audio>
-                <!--版权与关于我-->
+
             <div class="copyright">
                 © 2026 叶子喵~&小勋 | 本音乐播放器仅供个人学习使用，禁止商用
             </div>
@@ -163,7 +163,7 @@
     </div>
 
 <script>
-    // 内置网络歌单
+
     let song_list = [{"name":"海屿你",
                                   "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/hyn.mp3"},
                                {"name":"无人之岛",
@@ -194,7 +194,7 @@
 
     let currentIndex = 0;
 
-    // 渲染歌单
+
     function renderList(){
         songListBox.innerHTML = "";
         song_list.forEach((song, idx)=>{
@@ -206,7 +206,7 @@
         })
     }
 
-    // 加载歌曲【关键修复：直接 audio.src，移除source】
+
     function loadSong(index){
         if(song_list.length === 0) return;
         currentIndex = index;
@@ -223,32 +223,32 @@
         if(items[currentIndex]) items[currentIndex].classList.add("active");
     }
 
-    // 初始化
+
     renderList();
     audioPlayer.volume = 0.8;
 
-    // 上一曲
+
     prevBtn.addEventListener("click", ()=>{
         let newIdx = currentIndex - 1;
         if(newIdx < 0) newIdx = song_list.length -1;
         loadSong(newIdx);
     })
 
-    // 下一曲
+
     nextBtn.addEventListener("click", ()=>{
         let newIdx = currentIndex + 1;
         if(newIdx >= song_list.length) newIdx = 0;
         loadSong(newIdx);
     })
 
-    // 播放结束自动切歌
+
     audioPlayer.addEventListener("ended",()=>{
         let newIdx = currentIndex +1;
         if(newIdx >= song_list.length) newIdx = 0;
         loadSong(newIdx);
     })
 
-    // 选择本地文件
+
     selectFileBtn.addEventListener("click", ()=>{
         fileInput.click();
     })
@@ -258,7 +258,7 @@
         fileInput.value = "";
     })
 
-    // 拖拽文件
+
     ['dragenter','dragover','dragleave','drop'].forEach(eventName=>{
         mainBox.addEventListener(eventName, e=>e.preventDefault());
     })
@@ -271,7 +271,7 @@
         addAudioFiles(files);
     })
 
-    // 添加本地音频
+
     function addAudioFiles(files){
         for(let file of files){
             const url = URL.createObjectURL(file);
