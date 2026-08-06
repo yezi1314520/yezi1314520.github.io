@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta  name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>叶子喵~</title>
     <link rel="icon" href="./app.ico" type="image/x-icon">
     <style>
@@ -12,15 +13,20 @@
         }
         body {
             min-height: 100vh;
+            margin: 0px;
+            background-image: url("./bg.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #ffffff;
             font-family: "MiSans", sans-serif;
         }
         .player-box{
             width: 640px;
-            background:#fff;
+            background:rgba(255,255,255,0.72);
+            backdrop-filter: blur(10px);
             border:3px solid #ffc2d6;
             border-radius:36px;
             padding:44px 36px;
@@ -32,7 +38,7 @@
             margin-bottom:12px;
         }
         .title{
-            font-size:46px;
+            font-size:40px;
             color:#ff6699;
             margin-bottom:16px;
         }
@@ -107,6 +113,15 @@
         }
         .link-group {
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .tip-wrap {
+            position: relative;
+            overflow: visible;
         }
         .about-link {
             font-size: 14px;
@@ -119,11 +134,34 @@
             text-decoration: none;
         }
         .split {
-            margin: 0  8px;
+            margin: 0  4px;
             color: #ff88aa;
         }
         .about-link:hover,.release:hover {
             text-decoration: underline;
+        }
+        .tip-wrap::after{
+            content: attr(data-tip);
+            position: absolute;
+            top: 130%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff77aa;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            max-width: 160px;
+            line-height: 1.4;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            z-index: 9999;
+            margin-inline: 10px;
+        }
+        .tip-wrap:hover::after{
+            opacity: 1;
         }
 
     </style>
@@ -131,7 +169,7 @@
 <body>
     <div class="player-box" id="mainBox">
         <div class="cat-icon">😁</div>
-        <h1 class="title">叶子喵~and小勋 ♡ 音乐小屋</h1>
+        <h1 class="title">叶子 の 音乐小屋喵♡</h1>
         <div class="drop-tip">页面制作by叶子喵~,音乐提供by小勋💡 拖拽MP3到页面内 或 点击按钮选择本地音频 | 选中歌曲后手动点击播放按钮喵~</div>
 
         <div class="now-play-bar">
@@ -155,9 +193,13 @@
                 © 2026 叶子喵~&小勋 | 本音乐播放器仅供个人学习使用，禁止商用
             </div>
             <div class="link-group">
-                <a class="about-link" href="https://github.com/yezi1314520" target="_blank">关于我喵</a>
+                <div class="tip-wrap" data-tip="前往我的Github主页喵">
+                    <a class="about-link" href="https://github.com/yezi1314520" target="_blank">关于我喵</a>
+                </div>
                 <span class="split">|</span>
-                <a class="release" href="https://github.com/yezi1314520/yezi1314520.github.io/releases/tag/yezi" target="_blank">发布链接(有惊喜喵~)</a>
+                <div class="tip-wrap" data-tip="前往我的GitHub发布页喵">
+                    <a class="release" href="https://github.com/yezi1314520/yezi1314520.github.io/releases/tag/yezi" target="_blank">发布链接(有惊喜喵~)</a>
+                </div>
             </div>
             <input type="file" id="fileInput" accept=".mp3,.wav,.ogg,.m4a" multiple>
     </div>
