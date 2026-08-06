@@ -167,16 +167,57 @@
             opacity: 1;
         }
 
+        .pop-mask{
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+        }
+
+        .pop-box{
+            background: #fff;
+            border:3px solid #ffc2d6;
+            border-radius:24px;
+            padding:30px 24px;
+            text-align:center;
+            width: 320px;
+        }
+        .pop-title{
+            font-size:24px;
+            color:#ff6699;
+            margin-bottom:16px;
+        }
+        .pop-text{
+            color:#c94475;
+            font-size:15px;
+            line-height:1.7;
+            margin-bottom:24px;
+        }
+        .pop-btn{
+            background:#ffc2d6;
+            border:none;
+            color:white;
+            padding:8px 24px;
+            border-radius:30px;
+            font-size:15px;
+            cursor:pointer;
+        }
+        .pop-btn:hover{
+            background:#ff78a8;
+        }
+
     </style>
 </head>
 <body>
     <div class="player-box" id="mainBox">
-        <div class="cat-icon">😁</div>
+        <div class="cat-icon"> 🎀</div>
         <h1 class="title">叶子 の 音乐小屋喵♡</h1>
-        <div class="drop-tip">页面制作by叶子喵~,音乐提供by小勋💡 拖拽MP3到页面内 或 点击按钮选择本地音频 | 选中歌曲后手动点击播放按钮喵~</div>
-
+        <div class="drop-tip">页面制作by叶子喵~,音乐提供by小勋  | 💡  拖拽MP3到页面内 或 点击按钮选择本地音频 | 选中歌曲后手动点击播放按钮喵~</div>
         <div class="now-play-bar">
-            🎀 当前播放：<span id="currentSongName">暂无歌曲</span>
+            🎀 当前播放：<span id="currentSongName">暂无歌曲喵</span>
         </div>
 
         <div class="control-group">
@@ -207,6 +248,18 @@
             <input type="file" id="fileInput" accept=".mp3,.wav,.ogg,.m4a" multiple>
     </div>
 
+    <div class="pop-mask" id="welcomePop">
+        <div class="pop-box">
+            <h3 class="pop-title">欢迎喵~</h3>
+            <div class="pop-text">
+                欢迎来到叶子喵&小勋音乐小屋<br>
+                支持在线歌单 + 本地拖拽音频<br>
+                手机端不习惯请开启电脑模式访问<br>
+                本项目仅用于学习，禁止商用
+            </div>
+            <button class="pop-btn" id="closePopBtn">知道啦♡</button>
+        </div>
+    </div>
 <script>
 
     let song_list = [{"name":"海屿你",
@@ -236,10 +289,16 @@
     const mainBox = document.getElementById("mainBox");
     const selectFileBtn = document.getElementById("selectFileBtn");
     const fileInput = document.getElementById("fileInput");
+    const welcomePop = document.getElementById("welcomePop");
+    const closePopBtn = document.getElementById("closePopBtn");
 
     let currentIndex = 0;
-
-
+    window.addEventListener("load",()=>{
+        welcomePop.style.display = "flex";
+    })
+    closePopBtn.addEventListener("click",()=>{
+        welcomePop.style.display = "none";
+    })
     function renderList(){
         songListBox.innerHTML = "";
         song_list.forEach((song, idx)=>{
@@ -327,6 +386,8 @@
         }
         renderList();
     }
+
+
 </script>
 </body>
 </html>
