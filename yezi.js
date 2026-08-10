@@ -42,7 +42,11 @@ let song_list = [{"name":"海屿你 8d ",
         {"name":"别怕我伤心",
         "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/bpwsx.mp3"},
         {"name":"落泪",
-         "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/ll.mp3"}
+         "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/ll.mp3"},
+        {"name":"带我去找夜生活",
+         "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/45.mp3"},
+         {"name":"海海海",
+         "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/hhh.mp3"}
 
 
     ];
