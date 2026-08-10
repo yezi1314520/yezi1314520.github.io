@@ -1,5 +1,16 @@
 
-let song_list = [{"name":" ",
+let song_list = [{"name":"好想再爱你",
+                                                               "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/hxz.mp3"},
+{"name":"【Glitchtale】_我最后的一场游戏_ NITRO Remix",
+                                                               "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/pu.mp3"},
+{"name":"《别怕我伤心DJ》-【Hi·Res无损音质】",
+                                                               "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/zl.mp3"},
+{"name":"落泪",
+                                                               "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/lldj.mp3"},
+{"name":"“再听一万遍心做 可以回到从前吗？”_《心做しdj》",
+    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/xzdj.mp3"},
+    {"name":"“年少风雅鲜衣怒马 也不过一刹那_”_《红昭愿dj》",
+    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/hzydj.mp3"}
 
 
     ];
