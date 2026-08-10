@@ -1,1 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta  name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>叶子喵~</title>
+    <link rel="icon" href="./app.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            margin: 0px;
+            background-image: url("./bg.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "MiSans", sans-serif;
+        }
+        .player-box{
+            width: 640px;
+            background:rgba(255,255,255,0.72);
+            backdrop-filter: blur(10px);
+            border:3px solid #ffc2d6;
+            border-radius:36px;
+            padding:44px 36px;
+            text-align:center;
+            box-shadow: 0 0 24px #ffd6e3;
+        }
+        .cat-icon{
+            font-size:80px;
+            margin-bottom:12px;
+        }
+        .title{
+            font-size:40px;
+            color:#ff6699;
+            margin-bottom:16px;
+        }
+        .drop-tip{
+            color:#ff7799;
+            font-size:15px;
+            margin-bottom:20px;
+        }
+        .now-play-bar{
+            background-color:#ffe6ef;
+            border-radius:32px;
+            padding:14px;
+            font-size:22px;
+            color:#c94475;
+            font-weight:bold;
+            margin-bottom:20px;
+        }
+        .control-group{
+            display:flex;
+            gap:12px;
+            justify-content:center;
+            margin-bottom:24px;
+            flex-wrap: wrap;
+        }
+        .control-btn{
+            background-color:#ffc2d6;
+            color:#fff;
+            border:none;
+            font-size:15px;
+            padding:7px 16px;
+            border-radius:30px;
+            cursor:pointer;
+            transition:0.2s;
+        }
+        .control-btn:hover{
+            background-color:#ff78a8;
+            transform:scale(1.03);
+        }
+        audio{
+            width:100%;
+            margin-bottom:20px;
+        }
+        .song-item{
+            background:#ffe7ef;
+            padding:13px;
+            border-radius:18px;
+            margin:10px 0;
+            cursor:pointer;
+            color:#bb3862;
+            font-size:18px;
+            transition:0.2s;
+        }
+        .song-item:hover{
+            background:#ffc8dd;
+        }
+        .song-item.active{
+            background:#ffb6c1;
+            color:white;
+        }
+        .drag-over{
+            border:3px dashed #ff6699 !important;
+        }
+        #fileInput{
+            display:none;
+        }
+        .copyright {
+            margin-top: 30px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #ff88aa;
+            text-align: center;
+        }
+        .link-group {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .tip-wrap {
+            position: relative;
+            overflow: visible;
+        }
+        .about-link {
+            font-size: 14px;
+            color: #ff6699;
+            text-decoration: none;
+        }
+        .release {
+            font-size: 14px;
+            color: #ff6699;
+            text-decoration: none;
+        }
+        .zako   {
+            font-size: 14px;
+            color: #ff6699;
+            text-decoration: none;
+        }
+        .split {
+            margin: 0  4px;
+            color: #ff88aa;
+        }
+        .about-link:hover,.release:hover,zako:hover {
+            text-decoration: underline;
+        }
+        .tip-wrap::after{
+            content: attr(data-tip);
+            position: absolute;
+            top: 130%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff77aa;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            max-width: 160px;
+            line-height: 1.4;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            z-index: 9999;
+            margin-inline: 10px;
+        }
+        .tip-wrap:hover::after{
+            opacity: 1;
+        }
+        .tip-wrap:active::after{
+            opacity: 1;
+        }
 
+        .pop-mask{
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+        }
+
+        .pop-box{
+            background: #fff;
+            border:3px solid #ffc2d6;
+            border-radius:24px;
+            padding:30px 24px;
+            text-align:center;
+            width: 320px;
+        }
+        .pop-title{
+            font-size:24px;
+            color:#ff6699;
+            margin-bottom:16px;
+        }
+        .pop-text{
+            color:#c94475;
+            font-size:15px;
+            line-height:1.7;
+            margin-bottom:24px;
+        }
+        .pop-btn{
+            background:#ffc2d6;
+            border:none;
+            color:white;
+            padding:8px 24px;
+            border-radius:30px;
+            font-size:15px;
+            cursor:pointer;
+        }
+        .pop-btn:hover{
+            background:#ff78a8;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="player-box" id="mainBox">
+        <div class="cat-icon"> 🎀</div>
+        <h1 class="title">叶子 の 音乐小屋喵♡</h1>
+        <div class="drop-tip">页面制作by叶子喵~,音乐提供by小勋  | 💡  拖拽MP3到页面内 或 点击按钮选择本地音频 | 选中歌曲后手动点击播放按钮喵~</div>
+        <div class="now-play-bar">
+            🎀 当前播放：<span id="currentSongName">暂无歌曲喵</span>
+        </div>
+
+        <div class="control-group">
+            <button class="control-btn" id="prevBtn">◀ 上一曲</button>
+            <button class="control-btn" id="nextBtn">下一曲 ▶</button>
+            <button class="control-btn" id="selectFileBtn">📂 选择本地歌曲</button>
+        </div>
+
+
+            <audio id="audioPlayer" controls>
+
+            <div class="song-list" id="songListBox">
+            </div>
+            </audio>
+
+            <div class="copyright">
+                © 2026 叶子喵~&小勋 | 本音乐播放器仅供个人学习使用，禁止商用
+            </div>
+            <div class="link-group">
+                <div class="tip-wrap" data-tip="前往我的Github主页喵">
+                    <a class="about-link" href="https://github.com/yezi1314520" target="_blank">关于我喵</a>
+                </div>
+                <span class="split">|</span>
+                <div class="tip-wrap" data-tip="前往我的GitHub发布页喵">
+                    <a class="release" href="https://github.com/yezi1314520/yezi1314520.github.io/releases/tag/yezi" target="_blank">发布链接(有惊喜喵~)</a>
+                </div>
+            </div>
+            <input type="file" id="fileInput" accept=".mp3,.wav,.ogg,.m4a" multiple>
+    </div>
+
+    <div class="pop-mask" id="welcomePop">
+        <div class="pop-box">
+            <h3 class="pop-title">欢迎喵~</h3>
+            <div class="pop-text">
+                欢迎来到叶子喵&小勋音乐小屋<br>
+                支持在线歌单 + 本地拖拽音频<br>
+                手机端不习惯请开启电脑模式访问<br>
+                本项目仅用于学习，禁止商用<br>
+                Ciallo(∠・ω< )⌒☆
+            </div>
+            <button class="pop-btn" id="closePopBtn">知道啦♡</button>
+        </div>
+    </div>
+    <script src="./yezi.js" defer></script>
+</body>
+</html>
