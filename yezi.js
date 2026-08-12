@@ -52,7 +52,9 @@ let song_list = [{"name":"海屿你 8d ",
         {"name":"去年夏天",
         "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/qnxt.mp3"},
         {"name":"好像在哪见过你",
-        "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/hxznjgn.mp3"}
+        "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/hxznjgn.mp3"},
+    {"name":"别怕变老(来自3193*****4推荐",
+    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/bpbl.mp3"}
 
     ];
 
