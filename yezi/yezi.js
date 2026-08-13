@@ -14,8 +14,21 @@ let song_list = [{"name":"好想再爱你(追猎)",
                                                                                     {"name":"《Boyboyboybee》-【Hi·Res无损】",
                                                                                      "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/boy.mp3"},
                                                                                      {"name":"DJ阿智《只对你有感觉dj》",
-                                                                                     "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/zd.mp3"}
-
+                                                                                     "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/zd.mp3"},
+                                                                                    {"name":"离开我的依赖",
+                                                                                    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/lkwd5.mp3"},
+    {"name":"过火",
+    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/1314520.mp3"},
+     {"name":"精卫",
+    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/json.mp3"},
+ {"name":"牵丝戏",
+"url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/无敌加密看你马呢.mp3"},
+     {"name":"游京",
+"url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/屿哥哥爱你.mp3"},
+     {"name":"天亮以前说再见",
+"url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/tlyq.mp3"},
+     {"name":"大杂烩",
+"url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/52099.mp3"}
 
     ];
 
