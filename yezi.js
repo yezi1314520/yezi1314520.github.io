@@ -53,8 +53,12 @@ let song_list = [{"name":"海屿你 8d ",
         "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/qnxt.mp3"},
         {"name":"好像在哪见过你",
         "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/hxznjgn.mp3"},
-    {"name":"别怕变老(来自3193*****4推荐",
-    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/bpbl.mp3"}
+        {"name":"别怕变老(来自屿宝宝的推荐",
+        "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/bpbl.mp3"},
+        {"name":"最佳损友",
+         "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/908.mp3"},
+        {"name":"Hi-Res无损陋巷诗篇终兑现，风雨同舟数流年《数钱的女孩》",
+        "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/sq.mp3"}
 
     ];
 
