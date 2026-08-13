@@ -1,5 +1,6 @@
 
-let song_list = [{"name":"海屿你 8d ",
+let song_list = [
+        {"name":"海屿你 8d ",
         "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/hyn.mp3"},
         {"name":"无人之岛",
          "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/wrzd.mp3"},
@@ -58,7 +59,11 @@ let song_list = [{"name":"海屿你 8d ",
         {"name":"最佳损友",
          "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/908.mp3"},
         {"name":"Hi-Res无损陋巷诗篇终兑现，风雨同舟数流年《数钱的女孩》",
-        "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/sq.mp3"}
+        "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/sq.mp3"},
+        {"name":"阳光下的星星",
+        "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/ygx520.mp3"},
+        {"name":"陪你看星星(来自屿哥哥的推荐)",
+        "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/ygg520.mp3"}
 
     ];
 
