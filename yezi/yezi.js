@@ -28,7 +28,13 @@ let song_list = [{"name":"好想再爱你(追猎)",
      {"name":"天亮以前说再见",
 "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/tlyq.mp3"},
      {"name":"大杂烩",
-"url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/52099.mp3"}
+"url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/52099.mp3"},
+    {"name":"十年人间",
+    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/snrjdj.mp3"},
+    {"name":"好喜欢你",
+    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/haolike.mp3"},
+    {"name":"我知道你不爱我",
+    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/wzdnbaw.mp3"}
 
     ];
 
