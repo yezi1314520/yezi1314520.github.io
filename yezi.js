@@ -87,7 +87,18 @@ let song_list = [
           {"name":"戒烟",
         "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/戒烟.mp3"},
           {"name":"剑来",
-        "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/剑来.mp3"}
+        "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/剑来.mp3"},
+    {"name":"每日歌曲【Recollection】仔细听，你会发现它不是抑郁的，会有一种波澜壮阔的平静感",
+    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/recollection.mp3"},
+    {"name":"我知道你",
+    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/wzdao.mp3"},
+    {"name":"十年人间",
+    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/snrj.mp3"},
+    {"name":"海市蜃楼",
+    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/hssl.mp3"},
+    {"name":"游山恋",
+    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/yous.mp3"}
+
 
     ];
 
@@ -109,6 +120,16 @@ let song_list = [
     closePopBtn.addEventListener("click",()=>{
         welcomePop.style.display = "none";
     })
+    function playSong(index) {
+        if (songList.length === 0) return;
+        currentIndex = index;
+        const song = songList[currentIndex];
+        audioPlayer.src = song.src;
+        currentSongName.textContent = song.name;
+        renderSongList();
+        audioPlayer.load();
+        audioPlayer.play().catch(err => console.log("自动播放拦截：", err));
+}
     function renderList(){
         songListBox.innerHTML = "";
         song_list.forEach((song, idx)=>{
@@ -130,6 +151,7 @@ let song_list = [
         currentSongName.innerText = song.name;
         updateActive();
     }
+
 
     function updateActive(){
         const items = document.querySelectorAll(".song-item");
