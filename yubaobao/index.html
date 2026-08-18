@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title> 贪吃蛇 · 叶子宝宝</title>
+    <link rel="icon" href="./app.ico" type="image/x-icon">
     <style>
 
         * {
@@ -16,11 +17,14 @@
 
         body {
             min-height: 100vh;
-            background: #0b0e1a;
+            background-image: url("./bg.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Segoe UI', 'PingFang SC', Roboto, sans-serif;
+            font-family: "cjkFonts 全瀨體", sans-serif;
             padding: 12px;
             margin: 0;
             touch-action: none;
@@ -303,7 +307,7 @@
 
 <div class="game-container">
     <div class="header">
-        <div class="title">霓虹蛇|屿哥哥</div>
+        <div class="title">520</div>
         <div class="header-right">
             <div class="score-wrap">
                 <div class="score-item">🍎 <span class="num" id="scoreDisplay">0</span></div>
