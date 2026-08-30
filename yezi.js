@@ -99,7 +99,9 @@ let song_list = [
     {"name":"游山恋",
     "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/yous.mp3"},
         {"name":"fading",
-    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/fading.mp3"}
+    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/fading.mp3"},
+    {"name":"海阔天空",
+    "url":"https://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/hktk.mp3"}
 
 
 
