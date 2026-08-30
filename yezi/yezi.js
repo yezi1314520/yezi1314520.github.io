@@ -34,7 +34,9 @@ let song_list = [{"name":"好想再爱你(追猎)",
     {"name":"好喜欢你",
     "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/haolike.mp3"},
     {"name":"我知道你不爱我",
-    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/wzdnbaw.mp3"}
+    "url":"http://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/wzdnbaw.mp3"},
+    {"name":"海阔天空尾奏",
+    "url":"https://v4.gh-proxy.org/https://github.com/yezi1314520/muisc/raw/refs/heads/main/hktkdj.mp3"}
 
     ];
 
